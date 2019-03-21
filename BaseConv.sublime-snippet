@@ -1,0 +1,26 @@
+<snippet>
+	<content><![CDATA[
+string letters = "0123456789ABCDEF";
+int toInt(char c) { return letters.find(c); }
+
+int FromAnyBaseToDecimal(string in, int base) {
+	int res = 0;
+	for(size_t i = 0; i < in.size(); i++)
+		res *= base, res += toInt(in[i]);
+	return res;
+}
+
+string fromDecimalToAnyBase(int num, int base) {
+	if(num == 0) return "0";
+	string res = "";
+	for(; num; num /= base)
+		res = letters[num % base] + res;
+	return res;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>baseconv</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

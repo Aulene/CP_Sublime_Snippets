@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+struct MSTree
+{
+	vector <int> vs;
+	MSTree *l, *r;
+
+	int sum(int a, int b) { return a + b; }
+
+	MSTree *build(int start, int end)
+		{
+			if(start == end)
+				vs = vi(1, a[start]);
+			else
+				{
+					l = new MSTree, r = new MSTree;
+					l = l -> build(start, mid), r = r -> build(mid + 1, end);
+					merge(l->vs.begin(), l->vs.end(), r->vs.begin(),r->vs.end(), back_inserter(vs));
+				}
+			return this;
+		}
+
+	int query(int start, int end, int a, int b)
+		{
+			if(start > b || end < a)
+				return 0;
+			else if(start >= a && end <= b) {
+				
+			}
+			else
+				return sum(l -> query(start, mid, a, b), r -> query(mid + 1, end, a, b));
+		}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>mstree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

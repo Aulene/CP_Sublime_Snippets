@@ -1,0 +1,54 @@
+<snippet>
+	<content><![CDATA[
+const int MAXN = 101;
+const int mod = (int)1e9 + 7;
+
+struct matrix{
+    int N = MAXN; // N <= MAXN
+    int a[MAXN][MAXN]; 
+    
+    matrix(){
+        memset(a, 0, sizeof(a));
+    }
+    matrix(int n){
+        N = n;
+        memset(a, 0, sizeof(a));
+    }
+    decltype(a[0]) operator[](int x){
+        return a[x];
+    }
+    static matrix  I(int n){
+        matrix m(n);
+        for(int i = 0; i < n; i++) m[i][i] = 1;
+        return m;
+    }
+    
+    matrix friend operator*(matrix &a, matrix &b){
+        matrix c;
+        for(int i=0; i<a.N; i++){
+            for(int j=0; j<a.N; j++){
+                for(int k = 0; k<a.N; k++){
+                    c[i][j] += 1ll * a[i][k] * b[k][j] % mod;
+                    c[i][j] %= mod;
+                }
+            }
+        }
+        return c;
+    }
+    matrix friend operator^(matrix &a, ll b){
+        matrix ans = I(a.N);
+        while(b){
+            if(b%2!=0) ans = ans*a;
+            a = a*a;
+            b>>=1;
+        }
+        return ans;
+    }
+    
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>matrix</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

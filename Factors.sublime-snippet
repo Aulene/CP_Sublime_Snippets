@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+vi factors(int n) {
+	vi fax;
+	for(int i = 1; i <= sqrt(n); i++)
+		if(n % i == 0) {
+			if(i == sqrt(n)) fax.pb(i);
+			else fax.pb(i), fax.pb(n / i);
+		}
+	return fax;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>factors</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

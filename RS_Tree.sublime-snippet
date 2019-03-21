@@ -1,0 +1,56 @@
+<snippet>
+	<content><![CDATA[
+#define mid (start + end) / 2
+
+struct RSTree
+{
+	int val;
+	RSTree *l, *r;
+
+	int merge(int a, int b) { return a + b; }
+
+	RSTree *build(int start, int end)
+		{
+			if(start == end)
+				val = 0;
+			else
+				{
+					l = new RSTree, r = new RSTree;
+					l = l -> build(start, mid), r = r -> build(mid + 1, end);
+					val = merge(l -> val, r -> val);
+				}
+			return this;
+		}
+
+	RSTree *update(int start, int end, int a, int b, int v)	
+		{
+			if(start > b || end < a)
+				return this;
+
+			if(start >= a && end <= b) {
+				val = v;
+				return this;
+			}
+			
+			l = l -> update(start, mid, a, b, v);
+			r = r -> update(mid + 1, end, a, b, v);
+			val = merge(l -> val, r -> val);
+			return this;
+		}
+
+	int query(int start, int end, int a, int b)
+		{
+			if(start > b || end < a)
+				return 0;
+			else if(start >= a && end <= b)
+				return val;
+			else
+				return merge(l -> query(start, mid, a, b), r -> query(mid + 1, end, a, b));
+		}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>rstree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
